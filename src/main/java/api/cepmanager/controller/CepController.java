@@ -6,6 +6,7 @@ import api.cepmanager.entity.Users;
 import api.cepmanager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,9 @@ public class CepController {
     private UserRepository userRepository;
 
     @PostMapping
+    @Transactional
     public ResponseEntity saveAddress(@RequestBody UsersDataDTO usersDataDTO) {
+        System.out.println(usersDataDTO);
         userRepository.save(new Users(usersDataDTO));
         return ResponseEntity.ok(usersDataDTO);
     }

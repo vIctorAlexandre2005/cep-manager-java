@@ -3,7 +3,7 @@ package api.cepmanager.dto;
 import java.sql.Timestamp;
 
 public record AddressDataDTO(
-        String zipCode,
+        String zip_code,
         String street,
         String district,
         String city,

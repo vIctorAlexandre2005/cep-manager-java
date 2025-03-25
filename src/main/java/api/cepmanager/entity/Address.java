@@ -13,9 +13,8 @@ import java.sql.Timestamp;
 @Getter
 @NoArgsConstructor
 @Embeddable
-
 public class Address {
-    private String zipCode;
+    private String zip_code;
     private String street;
     private String district;
     private String city;
@@ -23,7 +22,7 @@ public class Address {
     private Timestamp created_at;
 
     public Address(AddressDataDTO addressDataDTO) {
-        this.zipCode = addressDataDTO.zipCode();
+        this.zip_code = addressDataDTO.zip_code();
         this.street = addressDataDTO.street();
         this.district = addressDataDTO.district();
         this.city = addressDataDTO.city();
