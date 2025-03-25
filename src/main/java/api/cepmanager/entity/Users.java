@@ -1,5 +1,6 @@
 package api.cepmanager.entity;
 
+import api.cepmanager.dto.UsersDataDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -25,4 +26,9 @@ public class Users {
     @Embedded
     private Address address;
 
+    public Users(UsersDataDTO usersDataDTO) {
+        this.name = usersDataDTO.name();
+        this.cpf = usersDataDTO.cpf();
+        this.address = new Address(usersDataDTO.addressDataDTO());
+    }
 }
