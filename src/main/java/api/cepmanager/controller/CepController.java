@@ -48,4 +48,11 @@ public class CepController {
             throw new RuntimeException(e);
         }
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deleteAddress(@PathVariable Long id) {
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
