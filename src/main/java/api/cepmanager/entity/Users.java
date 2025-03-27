@@ -27,8 +27,9 @@ public class Users {
     private Address address;
 
     public Users(UsersDataDTO usersDataDTO) {
+        this.id = usersDataDTO.id();
         this.name = usersDataDTO.name();
         this.cpf = usersDataDTO.cpf();
-        this.address = new Address(usersDataDTO.addressDataDTO());
+        this.address = new Address(usersDataDTO.address());
     }
 }
