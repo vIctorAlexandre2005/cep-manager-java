@@ -31,9 +31,15 @@ public class CepController {
     }
 
     @GetMapping
-    public Page<DataListAddressDTO> getAddress(Pageable pagination) {
-        var listDataAddress = repository.findAll(pagination).map(DataListAddressDTO::new);
-        return listDataAddress;
+    public ResponseEntity<Page<DataListAddressDTO>> getAddress(Pageable pagination) {
+        var listDataAddress = repository.findAllByActiveTrue(pagination).map(DataListAddressDTO::new);
+        return ResponseEntity.ok(listDataAddress);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getAddressDetails(@PathVariable Long id) {
+        var addressDetailsId = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DataListAddressDTO(addressDetailsId));
     }
 
     @PutMapping("/{id}")
@@ -52,7 +58,8 @@ public class CepController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity deleteAddress(@PathVariable Long id) {
-        repository.deleteById(id);
+        var addressId = repository.getReferenceById(id);
+        addressId.delete();
         return ResponseEntity.noContent().build();
     }
 }

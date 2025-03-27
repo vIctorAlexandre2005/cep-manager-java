@@ -24,6 +24,7 @@ public class Users {
     private Long id;
     private String name;
     private String cpf;
+    private Boolean active;
 
     @Embedded
     private Address address;
@@ -32,6 +33,7 @@ public class Users {
         this.id = usersDataDTO.id();
         this.name = usersDataDTO.name();
         this.cpf = usersDataDTO.cpf();
+        this.active = true;
         this.address = new Address(usersDataDTO.address());
     }
 
@@ -47,5 +49,9 @@ public class Users {
         if (dataUpdate.updateAddressDTO() != null) {
             this.address.updateInfo(dataUpdate.updateAddressDTO());
         }
+    }
+
+    public void delete() {
+        this.active = false;
     }
 }
