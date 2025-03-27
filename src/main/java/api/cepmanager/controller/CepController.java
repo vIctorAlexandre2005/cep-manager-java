@@ -1,6 +1,7 @@
 package api.cepmanager.controller;
 
 import api.cepmanager.dto.DataListAddressDTO;
+import api.cepmanager.dto.DataUpdateAddressDTO;
 import api.cepmanager.dto.UsersDataDTO;
 import api.cepmanager.entity.Users;
 import api.cepmanager.repository.UserRepository;
@@ -19,19 +20,32 @@ import java.util.List;
 public class CepController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
 
     @PostMapping
     @Transactional
     public ResponseEntity saveAddress(@RequestBody @Valid UsersDataDTO usersDataDTO) {
         System.out.println(usersDataDTO);
-        userRepository.save(new Users(usersDataDTO));
+        repository.save(new Users(usersDataDTO));
         return ResponseEntity.ok(usersDataDTO);
     }
 
     @GetMapping
     public Page<DataListAddressDTO> getAddress(Pageable pagination) {
-        var listDataAddress = userRepository.findAll(pagination).map(DataListAddressDTO::new);
+        var listDataAddress = repository.findAll(pagination).map(DataListAddressDTO::new);
         return listDataAddress;
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity updateAddress(@RequestBody @Valid DataUpdateAddressDTO dataUpdate) {
+        try {
+            var dataAddress = repository.getReferenceById(dataUpdate.id());
+            dataAddress.updateData(dataUpdate);
+
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -1,9 +1,9 @@
 package api.cepmanager.entity;
 
 import api.cepmanager.dto.AddressDataDTO;
+import api.cepmanager.dto.UpdateAddressDTO;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,5 +28,14 @@ public class Address {
         this.city = addressDataDTO.city();
         this.uf = addressDataDTO.uf();
         this.created_at = addressDataDTO.created_at();
+    }
+
+    public Address(String cep) {
+        this.zip_code = cep;
+    }
+
+
+    public void updateInfo(UpdateAddressDTO adress) {
+        this.zip_code = adress.zip_code();
     }
 }

@@ -1,7 +1,9 @@
 package api.cepmanager.entity;
 
+import api.cepmanager.dto.DataUpdateAddressDTO;
 import api.cepmanager.dto.UsersDataDTO;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,5 +33,19 @@ public class Users {
         this.name = usersDataDTO.name();
         this.cpf = usersDataDTO.cpf();
         this.address = new Address(usersDataDTO.address());
+    }
+
+    public void updateData(DataUpdateAddressDTO dataUpdate) {
+        if (dataUpdate.name() != null) {
+            this.name = dataUpdate.name();
+        }
+
+        if (dataUpdate.cpf() != null) {
+            this.cpf = dataUpdate.cpf();
+        }
+
+        if (dataUpdate.updateAddressDTO() != null) {
+            this.address.updateInfo(dataUpdate.updateAddressDTO());
+        }
     }
 }
