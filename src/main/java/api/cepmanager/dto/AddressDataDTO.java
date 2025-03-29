@@ -17,7 +17,6 @@ public record AddressDataDTO(
         @NotBlank
         String city,
         @NotBlank
-        String uf,
-        Timestamp created_at
+        String uf
 ) {
 }

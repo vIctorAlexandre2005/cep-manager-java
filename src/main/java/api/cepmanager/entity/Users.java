@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
@@ -25,6 +26,9 @@ public class Users {
     private String name;
     private String cpf;
     private Boolean active;
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private Timestamp created_at;
 
     @Embedded
     private Address address;

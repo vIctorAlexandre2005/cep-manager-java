@@ -19,7 +19,7 @@ public class Address {
     private String district;
     private String city;
     private String uf;
-    private Timestamp created_at;
+
 
     public Address(AddressDataDTO addressDataDTO) {
         this.zip_code = addressDataDTO.zip_code();
@@ -27,7 +27,6 @@ public class Address {
         this.district = addressDataDTO.district();
         this.city = addressDataDTO.city();
         this.uf = addressDataDTO.uf();
-        this.created_at = addressDataDTO.created_at();
     }
 
     public Address(String cep) {

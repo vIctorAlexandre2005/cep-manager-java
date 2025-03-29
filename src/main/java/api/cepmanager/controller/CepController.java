@@ -26,8 +26,9 @@ public class CepController {
     @Transactional
     public ResponseEntity saveAddress(@RequestBody @Valid UsersDataDTO usersDataDTO) {
         System.out.println(usersDataDTO);
-        repository.save(new Users(usersDataDTO));
-        return ResponseEntity.ok(usersDataDTO);
+        Users user = new Users(usersDataDTO);
+        repository.save(user);
+        return ResponseEntity.ok(new DataListAddressDTO(user));
     }
 
     @GetMapping
